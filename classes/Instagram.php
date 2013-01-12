@@ -72,7 +72,7 @@ class Instagram
         $apiUrl .= "&redirect_uri=" . $this->redirectUrl;
         $apiUrl .= "&response_type=" . $this->responseType;
         header("Location: $apiUrl");
-        exit;
+        exit();
     }
 
     /**
@@ -126,7 +126,14 @@ class Instagram
         return json_decode($result, true);
     }
 
-    private function apiCall($method, $params)
+	/**
+	 * Wrapper function for actual api calls
+	 *
+	 * @param $method
+	 * @param $params
+	 * @return mixed
+	 */
+	private function apiCall($method, $params)
     {
         $queryString = "?" . http_build_query(array_merge(array("access_token" => $this->accessToken), $params));
         $data = file_get_contents($this->endpointApi . $method . $queryString);
@@ -134,14 +141,21 @@ class Instagram
         return json_decode($data, true);
     }
 
-    public function search($tag)
+	/**
+	 * Wrapper to get recent media by tag function
+	 *
+	 * @param $tag
+	 * @param null $maxTagId
+	 * @param null $minTagId
+	 * @return mixed
+	 */
+	public function recentMediaByTag($tag, $maxTagId = null, $minTagId = null)
     {
-//        $data = $this->apiCall("tags/search", array(
-//            "q" => $tag
-//        ));
         $data = $this->apiCall("tags/" . $tag . "/media/recent", array(
-            "min_id" => $tag
+            "min_tag_id" => $minTagId,
+            "max_tag_id" => $maxTagId
         ));
-        print_r($data);
+
+        return $data;
     }
 }
