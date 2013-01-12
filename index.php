@@ -1,9 +1,5 @@
 <?php
-session_start();
-require_once "settings.php";
-require_once "classes/Instagram.php";
-
-$instagram = new Instagram(INSTAGRAM_CLIENT_ID, INSTAGRAM_CLIENT_SECRET, INSTAGRAM_REDIRECT_URL);
+require_once "includes/initialize.php";
 $code = "";
 
 //Check for valid accessToken, else navigate through authorisation process
@@ -41,7 +37,7 @@ if (isset($_SESSION['accessToken'])) {
 	foreach ($entries['data'] as $data) {
 		$imageUrl = $data['images']['thumbnail']['url'];
 		$altText = $data['caption']['text'];
-		echo "<div class='image'><img src='$imageUrl' alt='$altText' /></div>";
+		echo "<div class='image'><img src='$imageUrl' alt='$altText' title='$altText' /></div>";
 	}
 	?>
 </div>

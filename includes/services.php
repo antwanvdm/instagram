@@ -1,9 +1,5 @@
 <?php
-session_start();
-require_once "settings.php";
-require_once "classes/Instagram.php";
-
-$instagram = new Instagram(INSTAGRAM_CLIENT_ID, INSTAGRAM_CLIENT_SECRET, INSTAGRAM_REDIRECT_URL);
+require_once "initialize.php";
 $data = array();
 
 //Switch on the given method

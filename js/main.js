@@ -25,7 +25,7 @@ function fetchMoreImages(nextMaxTagId) {
         },
         contentType:'application/json',
         dataType:'json',
-        url:'services.php',
+        url:'includes/services.php',
         success:fetchMoreImagesSuccessHandler,
         error:fetchMoreImagesErrorHandler
     });
@@ -67,6 +67,6 @@ function fetchMoreImagesErrorHandler(error){
  */
 function imageTemplate(imageUrl, altText) {
     return "<div class='image'>" +
-        "<img src='" + imageUrl + "' alt='" + altText + "' />" +
+        "<img src='" + imageUrl + "' alt='" + altText + "' title='" + altText + "' />" +
     "</div>";
 }
