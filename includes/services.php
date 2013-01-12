@@ -3,10 +3,12 @@ require_once "initialize.php";
 $data = array();
 
 //Switch on the given method
-switch($_GET['method']){
+switch ($_GET['method']) {
 	case 'getImagesbyTag':
 		$instagram->accessToken = $_SESSION['accessToken'];
-		$entries = $instagram->recentMediaByTag("ajax", (isset($_GET['nextMaxTagId']) ? $_GET['nextMaxTagId'] : null));
+		$params = array("max_tag_id" => (isset($_GET['nextMaxTagId']) ? $_GET['nextMaxTagId'] : null));
+		$entries = $instagram->recentMediaByTag("ajax", $params);
+
 		$data['nextMaxTagId'] = $entries['pagination']['next_max_tag_id'];
 		$data['data'] = $entries['data'];
 		break;
