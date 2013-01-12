@@ -15,7 +15,7 @@ if (isset($_SESSION['accessToken'])) {
 		$code = $_GET['code'];
 		if ($instagram->retrieveAccessToken($code) !== false) {
 			$_SESSION['accessToken'] = $instagram->accessToken;
-			header(INSTAGRAM_REDIRECT_URL);
+			header("Location: " . INSTAGRAM_REDIRECT_URL);
 			exit();
 		}
 	} elseif (isset($_GET['error'])) {
