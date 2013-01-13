@@ -5,7 +5,7 @@ $data = array();
 
 //Get Arguments ready to make a dynamic call to the Instagram API
 $method = $_GET['method'];
-$arguments = json_decode($_GET['arguments'], true);
+$arguments = json_decode(stripslashes($_GET['arguments']), true); //Stripslashes fixes a weird error of 3 (\\\) slashes instead of 1 (\) on some servers..
 
 //Make a call & catch any possible errors thrown by the __call function
 try {

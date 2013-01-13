@@ -167,7 +167,9 @@ class Instagram
 	 */
 	private function apiCall($method, $params = array())
 	{
-		$queryString = "?" . http_build_query(array_merge(array("access_token" => $this->accessToken), $params));
+		$combinedParams = array_merge(array("access_token" => $this->accessToken, "client_id" => $this->clientId), $params);
+		$queryString = "?" . http_build_query($combinedParams);
+
 		try {
 			$data = file_get_contents($this->endpointApi . $method . $queryString);
 			return json_decode($data, true);
