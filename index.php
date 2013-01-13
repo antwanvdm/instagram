@@ -23,7 +23,7 @@
 </div>
 
 <div id="login-overlay">
-    <a href="login.php">If you want more functionality, please login!</a>
+    <a href="login.php">If you want any functionality, please login!</a>
 </div>
 
 <div id="preloader"></div>

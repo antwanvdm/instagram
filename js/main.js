@@ -44,9 +44,9 @@ function fetchImages() {
         data:{
             method:'apiTagsMediaRecent',
             arguments:JSON.stringify({
-                replace: searchTag,
-                params: {
-                    max_tag_id: nextMaxTagId
+                replace:searchTag,
+                params:{
+                    max_tag_id:nextMaxTagId
                 }
             })
         },
@@ -86,7 +86,7 @@ function fetchImagesSuccessHandler(data) {
  * @see fetchImages()
  */
 function fetchImagesErrorHandler(response) {
-    var responseObject = JSON.parse(response.responseText)
+    var responseObject = JSON.parse(response.responseText);
     alert(responseObject.message);
 }
 
