@@ -43,8 +43,12 @@ function fetchImages() {
         type:'GET',
         data:{
             method:'apiTagsMediaRecent',
-            tag:searchTag,
-            nextMaxTagId:nextMaxTagId
+            arguments:JSON.stringify({
+                replace: searchTag,
+                params: {
+                    max_tag_id: nextMaxTagId
+                }
+            })
         },
         contentType:'application/json',
         dataType:'json',
@@ -74,15 +78,16 @@ function fetchImagesSuccessHandler(data) {
     }
 
     //Set the ID so it can be used within the next AJAX call
-    nextMaxTagId = data.nextMaxTagId;
+    nextMaxTagId = data.pagination.next_max_tag_id;
 }
 
 /**
- * @param error
+ * @param response
  * @see fetchImages()
  */
-function fetchImagesErrorHandler(error) {
-    console.log("something went wrong.", error);
+function fetchImagesErrorHandler(response) {
+    var responseObject = JSON.parse(response.responseText)
+    alert(responseObject.message);
 }
 
 /**

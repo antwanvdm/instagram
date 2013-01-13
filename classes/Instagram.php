@@ -69,8 +69,8 @@ class Instagram
 	 *
 	 * @param $name
 	 * @param $arguments
+	 * @throws InstagramApiMethodCallException|BadMethodCallException
 	 * @return mixed
-	 * @throws InstagramApiMethodCallException
 	 */
 	public function __call($name, $arguments)
 	{
@@ -87,8 +87,10 @@ class Instagram
 			}
 
 			return $this->apiCall($method, $params);
-		} else {
+		} elseif (strpos($name, "api") !== false) {
 			throw new InstagramApiMethodCallException("Instagram API Method is not implemented as a function in the Instagram Class");
+		} else {
+			throw new BadMethodCallException("Method does not exists");
 		}
 	}
 

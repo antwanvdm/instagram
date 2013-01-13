@@ -3,21 +3,22 @@ require_once "initialize.php";
 $instagram->accessToken = isset($_SESSION['accessToken']) ? $_SESSION['accessToken'] : null;
 $data = array();
 
-//Switch on the given method
-switch ($_GET['method']) {
-	case 'apiTagsMediaRecent':
-		$params = array("max_tag_id" => (isset($_GET['nextMaxTagId']) ? $_GET['nextMaxTagId'] : null));
-		$tag = isset($_GET['tag']) ? $_GET['tag'] : '';
-		$entries = $instagram->apiTagsMediaRecent($tag, $params);
+//Get Arguments ready to make a dynamic call to the Instagram API
+$method = $_GET['method'];
+$arguments = json_decode($_GET['arguments'], true);
 
-		$data['nextMaxTagId'] = $entries['pagination']['next_max_tag_id'];
-		$data['data'] = $entries['data'];
-		break;
-
-	default:
-		$data = array("error" => "no valid method");
-		break;
+//Make a call & catch any possible errors thrown by the __call function
+try {
+	$data = $instagram->{$method}($arguments['replace'], $arguments['params']);
+} catch (InstagramApiMethodCallException $e) {
+	header('HTTP/1.1 500 Internal Server Error');
+	$data = array("message" => $e->getMessage());
+} catch (BadMethodCallException $e) {
+	header('HTTP/1.1 500 Internal Server Error');
+	$data = array("message" => $e->getMessage());
 }
 
+//Set the header, output & bye bye
+header('Content-Type: application/json');
 echo json_encode($data);
 exit();
