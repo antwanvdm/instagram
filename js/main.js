@@ -1,33 +1,56 @@
-var totalImages = 0;
-var maxImages = 100;
+var searchTag = '';
+var nextMaxTagId = null;
 
 $(document).ready(init);
 
 /**
  * Init the JS code
  */
-function init(){
-    totalImages = $('.image').size();
-    fetchMoreImages(nextMaxTagId);
+function init() {
+    $('#search-tag-form').on('submit', tagSearchHandler);
+    $('#load-more').on('click', loadMoreHandler);
+}
+
+/**
+ * Handler for form submit for searching a tag
+ *
+ * @return {Boolean}
+ */
+function tagSearchHandler() {
+    searchTag = $('#tag').val();
+    $('#images').empty();
+    $('#load-more').fadeIn();
+    fetchImages();
+
+    return false;
+}
+
+/**
+ * Handler for clicking the 'load more' button
+ *
+ * @return {Boolean}
+ */
+function loadMoreHandler() {
+    fetchImages();
+    return false;
 }
 
 /**
  * Fetch Images with AJAX request
- *
- * @param nextMaxTagId
  */
-function fetchMoreImages(nextMaxTagId) {
+function fetchImages() {
     $.ajax({
         type:'GET',
-        data: {
-            method: 'getImagesbyTag',
-            nextMaxTagId: nextMaxTagId
+        data:{
+            method:'apiTagsMediaRecent',
+            tag:searchTag,
+            nextMaxTagId:nextMaxTagId
         },
         contentType:'application/json',
         dataType:'json',
         url:'includes/services.php',
-        success:fetchMoreImagesSuccessHandler,
-        error:fetchMoreImagesErrorHandler
+        success:fetchImagesSuccessHandler,
+        error:fetchImagesErrorHandler
     });
 }
 
@@ -35,26 +58,30 @@ function fetchMoreImages(nextMaxTagId) {
  * Append data to HTML & retrieve more data if we're not done yet
  *
  * @param data
- * @see fetchMoreImages()
+ * @see fetchImages()
  */
-function fetchMoreImagesSuccessHandler(data){
-    var instagramData = data.data;
-    for(var i in instagramData){
-        var imgDiv = imageTemplate(instagramData[i].images.thumbnail.url, instagramData[i].caption.text);
-        $('.images').append(imgDiv);
+function fetchImagesSuccessHandler(data) {
+    if (data.data === undefined) {
+        return;
     }
 
-    totalImages += instagramData.length;
-    if (totalImages < maxImages){
-        fetchMoreImages(data.nextMaxTagId);
+    //Loop through data & append images in wrapper div
+    var instagramData = data.data;
+    for (var i in instagramData) {
+        var captionText = instagramData[i].caption !== null ? instagramData[i].caption.text : '';
+        var imgDiv = imageTemplate(instagramData[i].images.thumbnail.url, captionText);
+        $('#images').append(imgDiv);
     }
+
+    //Set the ID so it can be used within the next AJAX call
+    nextMaxTagId = data.nextMaxTagId;
 }
 
 /**
  * @param error
- * @see fetchMoreImages()
+ * @see fetchImages()
  */
-function fetchMoreImagesErrorHandler(error){
+function fetchImagesErrorHandler(error) {
     console.log("something went wrong.", error);
 }
 
@@ -62,11 +89,9 @@ function fetchMoreImagesErrorHandler(error){
  * Template for image div
  *
  * @param imageUrl
- * @param altText
+ * @param captionText
  * @return {String}
  */
-function imageTemplate(imageUrl, altText) {
-    return "<div class='image'>" +
-        "<img src='" + imageUrl + "' alt='" + altText + "' title='" + altText + "' />" +
-    "</div>";
+function imageTemplate(imageUrl, captionText) {
+    return "<img src='" + imageUrl + "' alt='" + captionText + "' title='" + captionText + "' />";
 }

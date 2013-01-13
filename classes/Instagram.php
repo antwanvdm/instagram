@@ -166,9 +166,12 @@ class Instagram
 	private function apiCall($method, $params = array())
 	{
 		$queryString = "?" . http_build_query(array_merge(array("access_token" => $this->accessToken), $params));
-		$data = file_get_contents($this->endpointApi . $method . $queryString);
-
-		return json_decode($data, true);
+		try {
+			$data = file_get_contents($this->endpointApi . $method . $queryString);
+			return json_decode($data, true);
+		} catch (HttpRequestException $e) {
+			return array();
+		}
 	}
 
 	/**
@@ -180,7 +183,26 @@ class Instagram
 	private function apiMethods()
 	{
 		return array(
-			"recentMediaByTag" => "/tags/@replace/media/recent"
+			"apiUsers" => "users/@replace",
+			"apiUsersSelfFeed" => "users/self/feed",
+			"apiUsersMediaRecent" => "users/@replace/media/recent",
+			"apiUsersSelfMediaLiked" => "users/self/media/liked",
+			"apiUsersSearch" => "users/search",
+			"apiUsersFollows" => "users/@replace/follows",
+			"apiUsersFollowedby" => "users/@replace/followed-by",
+			"apiUsersSelfRequestedby" => "users/self/requested-by",
+			"apiUsersRelationship" => "users/@replace/relationship", //TODO GET & POST
+			"apiMedia" => "media/@replace",
+			"apiMediaSearch" => "media/search",
+			"apiMediaPopular" => "media/popular",
+			"apiMediaComments" => "media/@replace/comments", //TODO GET & POST & DELETE & 2 @replace tags
+			"apiMediaLikes" => "media/@replace/likes", //TODO GET & POST & DELETE
+			"apiTags" => "tags/@replace",
+			"apiTagsMediaRecent" => "tags/@replace/media/recent",
+			"apiTagsSearch" => "tags/search",
+			"apiLocations" => "locations/@replace",
+			"apiLocationsSearch" => "locations/search",
+			"apiGeographiesMediaRecent" => "geographies/@replace/media/recent"
 		);
 	}
 }

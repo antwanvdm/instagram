@@ -3,8 +3,54 @@ body {
     padding: 0;
 }
 
-.image {
-    width: 150px;
-    height: 150px;
-    float: left;
+#container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+    #search {
+        width: 900px;
+        height: 26px;
+        background-color: #CCCCCC;
+        text-align: center;
+    }
+
+    #images {
+        width: 900px;
+    }
+
+        #images img {
+            width: 150px;
+            height: 150px;
+            margin: 0;
+            padding: 0;
+            display: block;
+            float: left;
+        }
+
+    #load-more {
+        display: none;
+        clear: both;
+        width: 900px;
+        height: 30px;
+        background-color: #CCCCCC;
+    }
+
+        #load-more a {
+            display: block;
+            text-align: center;
+            width: 900px;
+            height: 30px;
+        }
+
+            #load-more a span {
+                display: inline-block;
+                margin-top: 5px;
+            }
+
+#login-overlay {
+    position: fixed;
+    width: 100px;
+    bottom: 0;
+    right: 0;
 }

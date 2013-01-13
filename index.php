@@ -1,26 +1,3 @@
-<?php
-require_once "includes/initialize.php";
-$code = "";
-
-//Check for valid accessToken, else navigate through authorisation process
-if (isset($_SESSION['accessToken'])) {
-	$instagram->accessToken = $_SESSION['accessToken'];
-	$entries = $instagram->recentMediaByTag("ajax");
-} else {
-	if (isset($_GET['code'])) {
-		$code = $_GET['code'];
-		if ($instagram->retrieveAccessToken($code) !== false) {
-			$_SESSION['accessToken'] = $instagram->accessToken;
-			header("Location: " . INSTAGRAM_REDIRECT_URL);
-			exit();
-		}
-	} elseif (isset($_GET['error'])) {
-		//Error
-	} else {
-		$instagram->authorize();
-	}
-}
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,18 +5,27 @@ if (isset($_SESSION['accessToken'])) {
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script>var nextMaxTagId = <?php echo $entries['pagination']['next_max_tag_id']; ?>;</script>
     <script src="js/main.js"></script>
 </head>
 <body>
-<div class="images">
-	<?php
-	foreach ($entries['data'] as $data) {
-		$imageUrl = $data['images']['thumbnail']['url'];
-		$altText = $data['caption']['text'];
-		echo "<div class='image'><img src='$imageUrl' alt='$altText' title='$altText' /></div>";
-	}
-	?>
+<div id="container">
+    <div id="search">
+        <form id="search-tag-form">
+            <label for="tag">Enter a tag for Instagram search</label>
+            <input type="text" name="tag" id="tag"/>
+            <input type="submit" value="Load"/>
+        </form>
+    </div>
+    <div id="images"></div>
+    <div id="load-more">
+        <a href="#"><span>Load More</span></a>
+    </div>
 </div>
+
+<div id="login-overlay">
+    <a href="login.php">If you want more functionality, please login!</a>
+</div>
+
+<div id="preloader"></div>
 </body>
 </html>
