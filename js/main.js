@@ -17,11 +17,16 @@ function init() {
  * @return {Boolean}
  */
 function tagSearchHandler() {
+    //Set vars for searching
     searchTag = $('#tag').val();
+    nextMaxTagId = null;
+
+    //Remove all current images & fade Load more button in
     $('#images').empty();
     $('#load-more').fadeIn();
-    fetchImages();
 
+    //Fetch images & prevent default behavior
+    fetchImages();
     return false;
 }
 
