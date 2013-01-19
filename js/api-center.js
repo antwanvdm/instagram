@@ -5,17 +5,25 @@ $(document).ready(init);
  */
 function init() {
     $(".api-call a").on("click", formatApiData);
+    geoLocationAskPermission();
 }
 
+/**
+ * Format data for API Call
+ *
+ * @param event
+ * @return {Boolean}
+ */
 function formatApiData(event) {
-    var params = {};
     var replace = '';
+    var params = {};
 
-    $(event.currentTarget).siblings('input').each(function(){
+    //Loop through all the fields in this set & add data parameters
+    $(event.currentTarget).siblings('input').each(function () {
         var name = $(this).attr('name');
-        if (name == 'replace'){
+        if (name == 'replace') {
             replace = $(this).val();
-        }else{
+        } else {
             params[name] = $(this).val();
         }
     });
@@ -26,6 +34,7 @@ function formatApiData(event) {
         params:params
     });
 
+    //Do the actual apiCall & return false for default behavior
     apiCall(method, arguments);
     return false;
 }
@@ -48,10 +57,39 @@ function apiCall(method, arguments) {
     });
 }
 
+/**
+ * Success Handler for API call
+ *
+ * @param data
+ */
 function apiCallSuccessHandler(data) {
     console.log(data);
 }
 
+/**
+ * Error Handler for API call
+ *
+ * @param error
+ */
 function apiCallErrorHandler(error) {
     console.log(error);
+}
+
+/**
+ * Ask user permission if GeoLocation functionality is available
+ */
+function geoLocationAskPermission(){
+    if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(geoLocationHandler);
+    }
+}
+
+/**
+ * Handle geoLocation when permission is given (pre-fill Fields)
+ *
+ * @param data
+ */
+function geoLocationHandler(data){
+    $('#media-search-lat').val(data.coords.latitude);
+    $('#media-search-lng').val(data.coords.longitude);
 }

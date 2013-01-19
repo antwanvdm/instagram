@@ -8,6 +8,11 @@ body {
     margin: 0 auto;
 }
 
+    #container .api-call {
+        width: 418px;
+        float: left;
+    }
+
 #login-overlay {
     position: fixed;
     width: 100px;
