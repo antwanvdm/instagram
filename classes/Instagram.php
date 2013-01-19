@@ -59,8 +59,6 @@ class Instagram
 			return $this->data[$name];
 		}
 
-		$trace = debug_backtrace();
-		trigger_error('Undefined property via __get(): ' . $name . ' in ' . $trace[0]['file'] . ' on line ' . $trace[0]['line'], E_USER_NOTICE);
 		return null;
 	}
 
@@ -163,6 +161,7 @@ class Instagram
 	 *
 	 * @param $method
 	 * @param array $params
+	 * @throws ErrorException
 	 * @return mixed
 	 */
 	private function apiCall($method, $params = array())
@@ -173,8 +172,8 @@ class Instagram
 		try {
 			$data = file_get_contents($this->endpointApi . $method . $queryString);
 			return json_decode($data, true);
-		} catch (HttpRequestException $e) {
-			return array();
+		} catch (ErrorException $e) {
+			throw $e;
 		}
 	}
 

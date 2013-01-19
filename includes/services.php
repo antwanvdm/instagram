@@ -10,12 +10,9 @@ $arguments = json_decode(stripslashes($_GET['arguments']), true); //Stripslashes
 //Make a call & catch any possible errors thrown by the __call function
 try {
 	$data = $instagram->{$method}($arguments['replace'], $arguments['params']);
-} catch (InstagramApiMethodCallException $e) {
+} catch (Exception $e) {
 	header('HTTP/1.1 500 Internal Server Error');
-	$data = array("message" => $e->getMessage());
-} catch (BadMethodCallException $e) {
-	header('HTTP/1.1 500 Internal Server Error');
-	$data = array("message" => $e->getMessage());
+	$data = array("message" => $e->getMessage(), "type" => get_class($e));
 }
 
 //Set the header, output & bye bye
