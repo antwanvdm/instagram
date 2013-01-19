@@ -22,10 +22,6 @@
     </div>
 </div>
 
-<div id="login-overlay">
-    <a href="login.php">If you want more functionality, please login!</a>
-</div>
-
 <div id="preloader"></div>
 </body>
 </html>
