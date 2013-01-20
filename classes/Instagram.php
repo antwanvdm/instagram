@@ -1,7 +1,9 @@
 <?php
 /**
  * @class Instagram
- * Class to connect with Instagram & retrieve data
+ * @version 0.4
+ * @author Antwan van der Mooren
+ * @description Class to connect with Instagram & retrieve data
  */
 class Instagram
 {
