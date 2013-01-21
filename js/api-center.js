@@ -1,4 +1,5 @@
-var currentApiCallFieldset = null;
+var currentApiCallLink = null;
+var preLoader = null;
 
 $(document).ready(init);
 
@@ -6,6 +7,9 @@ $(document).ready(init);
  * Init the JS code
  */
 function init() {
+    preLoader = $("<span>");
+    preLoader.addClass("preloader");
+
     $(".api-call a").on("click", formatApiData);
     geoLocationAskPermission();
 }
@@ -18,12 +22,14 @@ function init() {
  */
 function formatApiData(event) {
     $('.api-call .code').hide();
-    currentApiCallFieldset = $(this);
+    currentApiCallLink = $(this);
+    currentApiCallLink.after(preLoader);
+
     var replace = '';
     var params = {};
 
     //Loop through all the fields in this set & add data parameters
-    currentApiCallFieldset.siblings('input').each(function () {
+    currentApiCallLink.siblings('input').each(function () {
         var name = $(this).attr('name');
         if (name == 'replace') {
             replace = $(this).val();
@@ -32,7 +38,7 @@ function formatApiData(event) {
         }
     });
 
-    var method = currentApiCallFieldset.attr('rel');
+    var method = currentApiCallLink.attr('rel');
     var arguments = JSON.stringify({
         replace:replace,
         params:params
@@ -69,8 +75,9 @@ function apiCall(method, arguments) {
 function apiCallSuccessHandler(data) {
     var pre = $("<pre>");
     pre.text(dump(data));
-    currentApiCallFieldset.siblings('.code').show().append(pre);
-    console.log(data);
+
+    currentApiCallLink.siblings('.code').show().append(pre);
+    currentApiCallLink.siblings('.preloader').remove();
 }
 
 /**
@@ -102,15 +109,12 @@ function geoLocationHandler(data) {
 }
 
 /**
- * Function : dump()
- * Arguments: The data - array,hash(associative array),object
- *    The level - OPTIONAL
- * Returns  : The textual representation of the array.
- * This function was inspired by the print_r function of PHP.
- * This will accept some data as the argument and return a
- * text that will be a more readable version of the
- * array/hash/object that is given.
- * Docs: http://www.openjs.com/scripts/others/dump_function_php_print_r.php
+ * Function like print_r in PHP to return a string representation of an Array/Object
+ *
+ * @param arr
+ * @param level
+ * @return {String}
+ * @link http://www.openjs.com/scripts/others/dump_function_php_print_r.php
  */
 function dump(arr, level) {
     var dumped_text = "";
@@ -118,7 +122,7 @@ function dump(arr, level) {
 
     //The padding given at the beginning of the line.
     var level_padding = "";
-    for (var j = 0; j < level + 1; j++) level_padding += "    ";
+    for (var j = 0; j < level; j++) level_padding += "    ";
 
     if (typeof(arr) == 'object') { //Array/Hashes/Objects
         for (var item in arr) {
