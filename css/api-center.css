@@ -13,6 +13,13 @@ body {
         float: left;
     }
 
+        #container .api-call .code {
+            height: 100px;
+            width: 418px;
+            overflow: scroll;
+            display: none;
+        }
+
 #login-overlay {
     position: fixed;
     width: 100px;
