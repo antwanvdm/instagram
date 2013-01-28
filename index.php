@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Instagram</title>
+    <title>Instagram | Image Search</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
@@ -18,10 +18,8 @@
     </div>
     <div id="images"></div>
     <div id="load-more">
-        <a href="#"><span>Load More</span></a>
+        <a href="#"><span class="text">Load More</span><span class="preloader"></span></a>
     </div>
 </div>
-
-<div id="preloader"></div>
 </body>
 </html>

@@ -7,6 +7,7 @@ $(document).ready(init);
  * Init the JS code
  */
 function init() {
+    $('.preloader').hide();
     $('#search-tag-form').on('submit', tagSearchHandler);
     $('#load-more').on('click', loadMoreHandler);
 }
@@ -26,6 +27,7 @@ function tagSearchHandler() {
     $('#load-more').fadeIn();
 
     //Fetch images & prevent default behavior
+    $('#load-more span').toggle();
     fetchImages();
     return false;
 }
@@ -36,6 +38,7 @@ function tagSearchHandler() {
  * @return {Boolean}
  */
 function loadMoreHandler() {
+    $('#load-more span').toggle();
     fetchImages();
     return false;
 }
@@ -84,6 +87,9 @@ function fetchImagesSuccessHandler(data) {
 
     //Set the ID so it can be used within the next AJAX call
     nextMaxTagId = data.pagination.next_max_tag_id;
+
+    //Toggle loader/text
+    $('#load-more span').toggle();
 }
 
 /**

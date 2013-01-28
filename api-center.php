@@ -4,7 +4,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Instagram | API Center</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/api-center.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

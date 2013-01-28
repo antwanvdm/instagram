@@ -4,19 +4,19 @@ body {
 }
 
 #container {
-    width: 900px;
+    width: 1200px;
     margin: 0 auto;
 }
 
     #search {
-        width: 900px;
+        width: 100%;
         height: 26px;
         background-color: #CCCCCC;
         text-align: center;
     }
 
     #images {
-        width: 900px;
+        width: 100%;
     }
 
         #images img {
@@ -31,7 +31,7 @@ body {
     #load-more {
         display: none;
         clear: both;
-        width: 900px;
+        width: 100%;
         height: 30px;
         background-color: #CCCCCC;
     }
@@ -39,7 +39,7 @@ body {
         #load-more a {
             display: block;
             text-align: center;
-            width: 900px;
+            width: 100%;
             height: 30px;
         }
 
@@ -48,10 +48,27 @@ body {
                 margin-top: 5px;
             }
 
-#login-overlay {
-    display: none;
-    position: fixed;
-    width: 100px;
-    bottom: 0;
-    right: 0;
+            #load-more a span.preloader {
+                background-image: url('../images/loader.gif');
+                width: 16px;
+                height: 16px;
+            }
+
+@media screen and (min-width: 900px) and (max-width: 1199px){
+    #container {width: 900px;}
+}
+
+@media screen and (min-width: 600px) and (max-width: 899px){
+    #container {width: 600px;}
+}
+
+@media screen and (min-width: 300px) and (max-width: 599px){
+    #container {width: 300px;}
+    #search {height: 52px;}
+}
+
+@media screen and (max-width: 299px) {
+    #container {width: 150px;}
+    #search {height: 94px;}
+    #tag {width: 144px;}
 }
