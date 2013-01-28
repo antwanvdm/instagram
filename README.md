@@ -11,8 +11,12 @@ Create a settings.php file (in the includes folder) with the following constants
 
 ##Requirements
 
-* PHP 5.3
+* PHP Minimum 5.2.17
 * Enable curl (PHP.ini: extension=php_curl.dll)
 * Enable openssl (PHP.ini: extension=php_openssl.dll)
 * jQuery 1.8.3 (included from googleapis.com)
 * Colorbox 1.3.29 (downloaded from http://www.jacklmoore.com/colorbox)
+
+##Example
+
+Check http://antwan.eu/instagram/ for a working example.
