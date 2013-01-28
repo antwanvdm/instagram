@@ -3,8 +3,10 @@
 <head>
     <title>Instagram | Image Search</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="css/colorbox.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="js/libs/jquery.colorbox-min.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
