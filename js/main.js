@@ -1,9 +1,9 @@
 var searchTag = '';
 var nextMaxTagId = null;
 var colorboxOptions = {
-    rel: 'gallery',
-    maxHeight: '100%',
-    current: '{current} / {total}'
+    rel:'gallery',
+    maxHeight:'100%',
+    current:'{current} / {total}'
 };
 
 $(document).ready(init);
@@ -92,7 +92,7 @@ function fetchImagesSuccessHandler(data) {
         var imgDiv = imageTemplate(images.thumbnail.url, images.standard_resolution.url, captionText);
 //        var colorboxHTML = colorboxTemplate(images.standard_resolution.url, captionText, totalLikes);
 
-        var colorBoxImg = $(imgDiv).colorbox($.extend(colorboxOptions, {title: totalLikes + ' &hearts;'}));
+        var colorBoxImg = $(imgDiv).colorbox($.extend(colorboxOptions, {title:totalLikes + ' &hearts;'}));
         $('#images').append(colorBoxImg);
     }
 
@@ -130,16 +130,16 @@ function imageTemplate(imageUrlThumb, imageUrlFull, caption) {
  * @param totalLikes
  * @return {String}
  */
-function colorboxTemplate(imageUrl, caption, totalLikes){
+function colorboxTemplate(imageUrl, caption, totalLikes) {
     return "<div>" +
         "<div><img src='" + imageUrl + "' alt='" + caption + "' title='" + caption + "' /></div>" +
         "<div><span>" + totalLikes + "&hearts;</span></div>" +
-    "</div>";
+        "</div>";
 }
 
 /**
  * Show preloader, hide 'load more' text
  */
-function togglePreloader(){
+function togglePreloader() {
     $('#load-more span').toggle();
 }
