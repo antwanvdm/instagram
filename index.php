@@ -14,7 +14,7 @@
     <div id="search">
         <form id="search-tag-form">
             <label for="tag">Enter a tag for Instagram search</label>
-            <input type="text" name="tag" id="tag"/>
+            <input type="text" name="tag" id="tag" autofocus/>
             <input type="submit" value="Load"/>
         </form>
     </div>

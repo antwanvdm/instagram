@@ -15,7 +15,7 @@ Create a settings.php file (in the includes folder) with the following constants
 * Enable curl (PHP.ini: extension=php_curl.dll)
 * Enable openssl (PHP.ini: extension=php_openssl.dll)
 * jQuery 1.9.0 (included from googleapis.com)
-* Colorbox 1.3.29 (downloaded from http://www.jacklmoore.com/colorbox)
+* Colorbox 1.3.32 (downloaded from http://www.jacklmoore.com/colorbox)
 
 ##Example
 
