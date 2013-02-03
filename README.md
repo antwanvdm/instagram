@@ -1,4 +1,4 @@
-Instagram PHP/JS code (v0.4)
+Instagram PHP/JS code (v1.0)
 =========
 Go the http://instagram.com/developer/ to register your Instagram application.
 
@@ -14,7 +14,7 @@ Create a settings.php file (in the includes folder) with the following constants
 * PHP Minimum 5.2.17
 * Enable curl (PHP.ini: extension=php_curl.dll)
 * Enable openssl (PHP.ini: extension=php_openssl.dll)
-* jQuery 1.8.3 (included from googleapis.com)
+* jQuery 1.9.0 (included from googleapis.com)
 * Colorbox 1.3.29 (downloaded from http://www.jacklmoore.com/colorbox)
 
 ##Example

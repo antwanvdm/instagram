@@ -1,7 +1,7 @@
 <?php
 /**
  * @class Instagram
- * @version 0.4
+ * @version 1.0
  * @author Antwan van der Mooren
  * @description Class to connect with Instagram & retrieve data
  */
@@ -163,7 +163,7 @@ class Instagram
 	 *
 	 * @param $method
 	 * @param array $params
-	 * @throws ErrorException
+	 * @throws InstagramApiMethodCallException
 	 * @return mixed
 	 */
 	private function apiCall($method, $params = array())
@@ -175,7 +175,7 @@ class Instagram
 			$data = file_get_contents($this->endpointApi . $method . $queryString);
 			return json_decode($data, true);
 		} catch (ErrorException $e) {
-			throw $e;
+			throw new InstagramApiMethodCallException("This input is invalid or blocked by Instagram, try again!");
 		}
 	}
 
