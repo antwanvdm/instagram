@@ -26,6 +26,9 @@
 #cboxError{padding:50px; border:1px solid #ccc;}
 #cboxLoadedContent{border:5px solid #000; background:#fff;}
 #cboxTitle{position:absolute; top:-20px; left:0; color:#ccc;}
+#cboxTitle a{text-decoration: none; color:#ccc;}
+#cboxTitle a:hover{color:#fff;}
+#cboxTitle a.location{display: inline-block; background:url(../images/colorbox/location_icon.png) no-repeat; width: 15px; height: 15px; vertical-align: middle;}
 #cboxCurrent{position:absolute; top:-20px; right:0px; color:#ccc;}
 #cboxSlideshow{position:absolute; top:-20px; right:90px; color:#fff;}
 #cboxPrevious{position:absolute; top:50%; left:5px; margin-top:-32px; background:url(../images/colorbox/controls.png) no-repeat top left; width:28px; height:65px; text-indent:-9999px;}
