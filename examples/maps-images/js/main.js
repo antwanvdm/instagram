@@ -1,7 +1,11 @@
-/**
- * Created with JetBrains PhpStorm.
- * User: Antwan
- * Date: 12-2-13
- * Time: 21:55
- * To change this template use File | Settings | File Templates.
- */
+var map;
+function initialize() {
+    var mapOptions = {
+        zoom:8,
+        center:new google.maps.LatLng(-34.397, 150.644),
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);

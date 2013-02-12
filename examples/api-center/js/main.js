@@ -61,7 +61,7 @@ function apiCall(method, arguments) {
         },
         contentType:'application/json',
         dataType:'json',
-        url:'includes/services.php',
+        url:'../../includes/services.php',
         success:apiCallSuccessHandler,
         error:apiCallErrorHandler
     });

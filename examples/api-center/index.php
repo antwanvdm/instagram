@@ -6,9 +6,9 @@ session_start();
 <head>
     <title>Instagram | API Center</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/api-center.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="js/api-center.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 <div id="container">
