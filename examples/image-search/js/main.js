@@ -66,7 +66,7 @@ function fetchImages() {
         },
         contentType:'application/json',
         dataType:'json',
-        url:'includes/services.php',
+        url:'../../includes/services.php',
         success:fetchImagesSuccessHandler,
         error:fetchImagesErrorHandler
     });
