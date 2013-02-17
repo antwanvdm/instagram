@@ -14,9 +14,10 @@ Create a settings.php file (in the includes folder) with the following constants
 * PHP Minimum 5.2.17
 * Enable curl (PHP.ini: extension=php_curl.dll)
 * Enable openssl (PHP.ini: extension=php_openssl.dll)
-* jQuery 1.9.0 (included from googleapis.com)
-* Colorbox 1.3.32 (downloaded from http://www.jacklmoore.com/colorbox)
 
-##Example
+##Examples
 
-Check http://antwan.eu/instagram/ for a working example.
+There are a few examples included within this project. Take a look on the following URL's:
+
+* Gallery with Colorbox: http://antwan.eu/instagram/examples/image-search/
+* Google Maps slideshow: http://antwan.eu/instagram/examples/maps-images/
