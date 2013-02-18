@@ -11,6 +11,7 @@ var markers = [];
 //Geocoder vars
 var geocoder = new google.maps.Geocoder();
 var cities = ["Amsterdam", "Bergen op Zoom", "Paris", "New York", "Sydney", "Berlin", "Cairo", "Mexico City", "Tokyo"];
+var currentCity = '';
 
 //InfoWindow vars
 var infoWindow;
@@ -21,7 +22,7 @@ var infoWindowOptions = {
         height:"150px"
     },
     closeBoxMargin:"0px 0px -20px 0px"
-}
+};
 
 //Intervals
 var geocodeInterval = null;
@@ -62,7 +63,7 @@ function createDataMarker(data) {
     google.maps.event.addListener(marker, 'click', $.proxy(openMarkerInfo, this, marker, data));
 
     return marker;
-};
+}
 
 /**
  * Open the info window (& close others)
@@ -84,7 +85,7 @@ function openMarkerInfo(marker, data) {
 
     //Open window and bind event when dom is ready loading the infoWindow
     infoWindow.open(map, marker);
-};
+}
 
 /**
  * HTML template for infoWindow
@@ -95,7 +96,7 @@ function openMarkerInfo(marker, data) {
  */
 function markerWindowTemplate(data) {
     return '<img src="' + data.images.thumbnail.url + '" alt=""/>';
-};
+}
 
 /**
  * Fetch Images with AJAX request
@@ -143,13 +144,13 @@ function fetchImagesSuccessHandler(returnData) {
 }
 
 /**
- * @todo if fails, return city back into array for another try (API has some weird timeouts.
+ * Make a silent fail, and add the city back into the cue. Instagram timeout should not interfere with our cities.
+ *
  * @param response
  * @see fetchImages
  */
 function fetchImagesErrorHandler(response) {
-    var responseObject = JSON.parse(response.responseText);
-    console.log(responseObject);
+    cities.push(currentCity);
 }
 
 /**
@@ -159,11 +160,11 @@ function getLatLngForCity() {
     if (cities.length > 0) {
         //Get a random city
         randomArrayNumber = Math.floor(Math.random() * cities.length);
-        var city = cities[randomArrayNumber];
+        currentCity = cities[randomArrayNumber];
 
         //Remove city from array & get geoInformation
         cities.splice(randomArrayNumber, 1);
-        geocoder.geocode({'address':city }, geocodeHandler);
+        geocoder.geocode({'address':currentCity }, geocodeHandler);
     } else {
         clearInterval(geocodeInterval);
     }
@@ -194,7 +195,7 @@ function focusToMarker() {
         return;
     }
 
-    map.setZoom(14);
+    map.setZoom(15);
     randomArrayNumber = Math.floor(Math.random() * markers.length);
     google.maps.event.trigger(markers[randomArrayNumber], 'click');
 }
