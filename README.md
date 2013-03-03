@@ -11,7 +11,7 @@ Create a settings.php file (in the includes folder) with the following constants
 
 ##Requirements
 
-* PHP Minimum 5.2.17
+* PHP Minimum 5.3
 * Enable curl (PHP.ini: extension=php_curl.dll)
 * Enable openssl (PHP.ini: extension=php_openssl.dll)
 
