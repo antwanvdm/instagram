@@ -1,0 +1,81 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: url('../images/bg.png') repeat;
+}
+
+#container {
+    width: 1200px;
+    margin: 0 auto;
+    background: url('../images/container.png') repeat;
+    -moz-box-shadow: 1px 1px 1px #000;
+    -webkit-box-shadow: 1px 1px 1px #000;
+    box-shadow: 1px 1px 1px #000;
+}
+
+    #search {
+        width: 100%;
+        height: 26px;
+        background-color: #CCCCCC;
+        text-align: center;
+    }
+
+    #images {
+        width: 100%;
+    }
+
+        #images img {
+            cursor: pointer;
+            width: 150px;
+            height: 150px;
+            margin: 0;
+            padding: 0;
+            display: block;
+            float: left;
+        }
+
+    #load-more {
+        display: none;
+        clear: both;
+        width: 100%;
+        height: 30px;
+        background-color: #CCCCCC;
+    }
+
+        #load-more a {
+            display: block;
+            text-align: center;
+            width: 100%;
+            height: 30px;
+        }
+
+            #load-more a span {
+                display: inline-block;
+                margin-top: 5px;
+            }
+
+            #load-more a span.preloader {
+                margin-top: 8px;
+                background-image: url('../images/loader.gif');
+                width: 16px;
+                height: 16px;
+            }
+
+@media screen and (min-width: 900px) and (max-width: 1199px){
+    #container {width: 900px;}
+}
+
+@media screen and (min-width: 600px) and (max-width: 899px){
+    #container {width: 600px;}
+}
+
+@media screen and (min-width: 300px) and (max-width: 599px){
+    #container {width: 300px;}
+    #search {height: 52px;}
+}
+
+@media screen and (max-width: 299px) {
+    #container {width: 150px;}
+    #search {height: 94px;}
+    #tag {width: 144px;}
+}

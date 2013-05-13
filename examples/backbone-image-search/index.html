@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram | Image Search</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/colorbox.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="container">
+    <div id="search">
+        <form id="search-tag-form">
+            <label for="tag">Enter a tag for Instagram search</label>
+            <input type="text" name="tag" id="tag" autofocus/>
+            <input type="submit" value="Load"/>
+        </form>
+    </div>
+    <div id="images"></div>
+    <div id="load-more">
+        <a href="#"><span class="text">Load More</span><span class="preloader"></span></a>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="js/libs/jquery.colorbox-min.js"></script>
+<script src="js/libs/json2.js"></script>
+<script src="js/libs/underscore.js"></script>
+<script src="js/libs/backbone.js"></script>
+<script src="js/views/SearchTagForm.js"></script>
+<script src="js/views/Images.js"></script>
+<script src="js/views/LoadMore.js"></script>
+<script src="js/views/Error.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
