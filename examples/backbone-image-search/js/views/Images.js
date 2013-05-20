@@ -58,7 +58,6 @@ var ImagesView = Backbone.View.extend({
      * @see ImagesView.fetchImages
      */
     fetchImagesSuccessHandler: function (model, response, options) {
-        this.model.clear();
         events.trigger('Images:fetchSuccess', model, response, options);
         if (response.data === undefined) {
             return;
