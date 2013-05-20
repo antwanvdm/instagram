@@ -1,15 +1,19 @@
 var ErrorView = Backbone.View.extend({
+    /**
+     * Init view with Backbone magic
+     */
     initialize: function () {
-        events.on('images:fetchError', this.fetchImagesErrorHandler, this);
+        events.on('Images:fetchError', this.fetchImagesErrorHandler, this);
     },
 
     /**
      * Error handler
      *
+     * @param model
      * @param response
+     * @param options
      */
-    fetchImagesErrorHandler: function (response) {
-        console.log(response);
+    fetchImagesErrorHandler: function (model, response, options) {
         var responseObject = JSON.parse(response.responseText);
         alert(responseObject.message);
     }

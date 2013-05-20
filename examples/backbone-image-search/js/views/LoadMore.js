@@ -1,11 +1,13 @@
 var LoadMoreView = Backbone.View.extend({
-    initialize: function (options) {
-        this.el = options.el; //Should be removed?
+    /**
+     * Init view with Backbone magic
+     */
+    initialize: function () {
         this.$('.preloader').hide();
-        this.el.on('click', this.click, this);
+        this.$el.on('click', _.bind(this.click, this));
 
-        events.on('images:fetchSuccess', this.fetchImagesSuccessHandler, this);
-        events.on('images:fetchError', this.fetchImagesErrorHandler, this);
+        events.on('Images:fetchSuccess', this.fetchImagesSuccessHandler, this);
+        events.on('Images:fetchError', this.toggle, this);
         events.on('SearchTagForm:submit', this.toggle, this);
     },
 
@@ -24,10 +26,12 @@ var LoadMoreView = Backbone.View.extend({
     /**
      * Success handler for loading data
      *
-     * @param returnData
+     * @param model
+     * @param response
+     * @param options
      */
-    fetchImagesSuccessHandler: function (returnData) {
-        if (returnData.data === undefined) {
+    fetchImagesSuccessHandler: function (model, response, options) {
+        if (response.data === undefined) {
             return;
         }
 
@@ -35,18 +39,10 @@ var LoadMoreView = Backbone.View.extend({
     },
 
     /**
-     * Error handler for loading data
-     */
-    fetchImagesErrorHandler: function () {
-        this.toggle();
-        this.el.hide();
-    },
-
-    /**
      * Show preloader, hide 'load more' text
      */
     toggle: function () {
-        this.el.fadeIn();
+        this.$el.fadeIn();
         this.$('span').toggle();
     }
 });

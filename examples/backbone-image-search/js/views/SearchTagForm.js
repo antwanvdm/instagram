@@ -1,22 +1,22 @@
 var SearchTagFormView = Backbone.View.extend({
-    initialize: function (options) {
-        this.el = options.el; //Should be removed?
-        this.el.on('submit', _.bind(this.submitHandler, this));
+    /**
+     * Init view with Backbone magic
+     */
+    initialize: function () {
+        this.$el.on('submit', _.bind(this.submitHandler, this));
     },
 
     /**
      * Handler for form submit for searching a tag
      *
+     * @param e
      * @return {Boolean}
+     * @see SearchTagFormView.initialize
      */
     submitHandler: function (e) {
         e.preventDefault();
 
-        //Set vars for searching
-        searchTag = $('#tag').val();
-        nextMaxTagId = null;
-
-        //Fetch images & prevent default behavior
-        events.trigger('SearchTagForm:submit');
+        //Trigger event for outside world
+        events.trigger('SearchTagForm:submit', this.$('#tag').val());
     }
 });
